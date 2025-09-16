@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HippoEng - Learn English from A1 to C2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e7ae6;
+            --secondary: #ff7e30;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #6c5ce7);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #ff6a13;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .levels {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .level-header {
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+        }
+        
+        .a1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+        .a2 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+        .b1 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+        .b2 { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+        .c1 { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+        .c2 { background: linear-gradient(135deg, #a6c0fe, #f68084); }
+        
+        .level-body {
+            padding: 1.5rem;
+        }
+        
+        .level-body h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .level-body ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .level-body li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .level-body i {
+            color: var(--success);
+        }
+        
+        .test-section {
+            padding: 4rem 0;
+            background: var(--light);
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .options label {
+            display: block;
+            padding: 10px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .options label:hover {
+            background: #e9ecef;
+        }
+        
+        .progress-section {
+            padding: 4rem 0;
+        }
+        
+        .progress-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+        
+        .encouragement {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+        }
+        
+        .channel-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary), #6c5ce7);
+            color: white;
+            text-align: center;
+        }
+        
+        .channel-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .channel-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #ff4d4d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .channel-btn:hover {
+            background: #ff3333;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-hippo"></i>
+                <h1>HippoEng</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#levels">Levels</a></li>
+                    <li><a href="#test">Test Your English</a></li>
+                    <li><a href="#progress">Your Progress</a></li>
+                    <li><a href="#channel">Our Channel</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Learn English from A1 to C2 Level</h2>
+            <p>Fun, simple, and effective way to improve your English skills with HippoEng!</p>
+            <a href="#test" class="btn">Start Learning Now</a>
+        </div>
+    </section>
+
+    <section id="levels" class="levels">
+        <div class="container">
+            <h2 class="section-title">English Proficiency Levels</h2>
+            <div class="levels-grid">
+                <div class="level-card">
+                    <div class="level-header a1">
+                        <h2>A1 Beginner</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Basic greetings and introductions</li>
+                            <li><i class="fas fa-check-circle"></i> Simple everyday expressions</li>
+                            <li><i class="fas fa-check-circle"></i> Basic personal information</li>
+                            <li><i class="fas fa-check-circle"></i> Simple sentences about familiar topics</li>
+                        </ul>
+                        <button class="btn start-test" data-level="A1">Take A1 Test</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-header a2">
+                        <h2>A2 Elementary</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Frequently used expressions</li>
+                            <li><i class="fas fa-check-circle"></i> Routine tasks and descriptions</li>
+                            <li><i class="fas fa-check-circle"></i> Simple direct communication</li>
+                            <li><i class="fas fa-check-circle"></i> Basic personal and family information</li>
+                        </ul>
+                        <button class="btn start-test" data-level="A2">Take A2 Test</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-header b1">
+                        <h2>B1 Intermediate</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Main points of clear standard input</li>
+                            <li><i class="fas fa-check-circle"></i> Deal with most situations while traveling</li>
+                            <li><i class="fas fa-check-circle"></i> Describe experiences and events</li>
+                            <li><i class="fas fa-check-circle"></i> Dreams, hopes and ambitions</li>
+                        </ul>
+                        <button class="btn start-test" data-level="B1">Take B1 Test</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-header b2">
+                        <h2>B2 Upper Intermediate</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Main ideas of complex text</li>
+                            <li><i class="fas fa-check-circle"></i> Interact with fluency and spontaneity</li>
+                            <li><i class="fas fa-check-circle"></i> Detailed text on wide range of subjects</li>
+                            <li><i class="fas fa-check-circle"></i> Advantages and disadvantages of viewpoints</li>
+                        </ul>
+                        <button class="btn start-test" data-level="B2">Take B2 Test</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-header c1">
+                        <h2>C1 Advanced</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Longer and demanding texts</li>
+                            <li><i class="fas fa-check-circle"></i> Express ideas fluently and spontaneously</li>
+                            <li><i class="fas fa-check-circle"></i> Use language flexibly and effectively</li>
+                            <li><i class="fas fa-check-circle"></i> Clear, well-structured detailed text</li>
+                        </ul>
+                        <button class="btn start-test" data-level="C1">Take C1 Test</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-header c2">
+                        <h2>C2 Proficiency</h2>
+                    </div>
+                    <div class="level-body">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Everything heard or read with ease</li>
+                            <li><i class="fas fa-check-circle"></i> Summarize information from different sources</li>
+                            <li><i class="fas fa-check-circle"></i> Express yourself spontaneously and fluently</li>
+                            <li><i class="fas fa-check-circle"></i> Differentiate finer shades of meaning</li>
+                        </ul>
+                        <button class="btn start-test" data-level="C2">Take C2 Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="test" class="test-section">
+        <div class="container">
+            <h2 class="section-title">Test Your English Level</h2>
+            <div class="test-container">
+                <div id="test-instructions">
+                    <h3>Welcome to the English Level Test!</h3>
+                    <p>Select a level from above to begin testing your English skills. The test will help you understand your current proficiency level and track your progress over time.</p>
+                    <p>Each test contains 10 multiple-choice questions. After completing the test, you'll receive a score and personalized feedback.</p>
+                </div>
+                <div id="test-content" class="hidden">
+                    <h3 id="test-level">A1 Level Test</h3>
+                    <div class="question">
+                        <h4>Question <span id="question-number">1</span> of 10</h4>
+                        <p id="question-text">What is your name?</p>
+                        <div class="options" id="question-options">
+                            <label><input type="radio" name="answer" value="A"> My name is John</label>
+                            <label><input type="radio" name="answer" value="B"> I am fine</label>
+                            <label><input type="radio" name="answer" value="C"> Thank you</label>
+                            <label><input type="radio" name="answer" value="D"> I am 25 years old</label>
+                        </div>
+                    </div>
+                    <button id="next-question" class="btn">Next Question</button>
+                </div>
+                <div id="test-results" class="hidden">
+                    <h3>Test Results</h3>
+                    <p>Your score: <span id="score">8</span>/10</p>
+                    <div id="encouragement-message" class="encouragement">
+                        <p>Great job! You're making excellent progress on your English learning journey!</p>
+                    </div>
+                    <button id="retake-test" class="btn">Retake Test</button>
+                    <button id="view-progress" class="btn">View Progress</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="progress" class="progress-section">
+        <div class="container">
+            <h2 class="section-title">Your Learning Progress</h2>
+            <div class="progress-container">
+                <h3>Your English Learning Journey</h3>
+                <p>Track your progress from A1 to C2 level</p>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 30%;"></div>
+                </div>
+                
+                <div id="progress-details">
+                    <p>Current Level: <strong id="current-level">A2</strong></p>
+                    <p>Next Level: <strong>B1</strong></p>
+                    <p>Tests Completed: <strong>4</strong></p>
+                    <p>Average Score: <strong>78%</strong></p>
+                </div>
+                
+                <div class="encouragement">
+                    <p>Well done! You're progressing steadily. Keep practicing regularly to reach the next level!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="channel" class="channel-section">
+        <div class="container channel-content">
+            <h2>Check Out Our YouTube Channel</h2>
+            <p>For more comprehensive English lessons, grammar explanations, and learning resources, visit our YouTube channel!</p>
+            <a href="https://www.youtube.com/@HippoEng" target="_blank" class="channel-btn">
+                <i class="fab fa-youtube"></i> Visit HippoEng Channel
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 HippoEng. All Rights Reserved.</p>
+            <p>This website and all its content are the property of HippoEng YouTube channel.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Test data for each level
+            const testQuestions = {
+                A1: [
+                    {
+                        question: "What's your name?",
+                        options: ["My name is John", "I am fine", "Thank you", "I am 25 years old"],
+                        correct: 0
+                    },
+                    {
+                        question: "How are you?",
+                        options: ["I'm 25", "I'm a teacher", "I'm fine, thank you", "My name is Anna"],
+                        correct: 2
+                    },
+                    {
+                        question: "Where ___ you from?",
+                        options: ["is", "are", "am", "be"],
+                        correct: 1
+                    },
+                    {
+                        question: "This is ___ book.",
+                        options: ["a", "an", "the", "-"],
+                        correct: 0
+                    },
+                    {
+                        question: "She ___ to school every day.",
+                        options: ["go", "goes", "going", "went"],
+                        correct: 1
+                    },
+                    {
+                        question: "What time is it?",
+                        options: ["It's clock", "It's 3:00", "It's time", "It's good"],
+                        correct: 1
+                    },
+                    {
+                        question: "I like ___ TV in the evening.",
+                        options: ["watching", "watch", "watches", "watched"],
+                        correct: 0
+                    },
+                    {
+                        question: "___ you speak English?",
+                        options: ["Does", "Are", "Do", "Is"],
+                        correct: 2
+                    },
+                    {
+                        question: "They ___ in London.",
+                        options: ["live", "lives", "living", "lived"],
+                        correct: 0
+                    },
+                    {
+                        question: "What ___ you do yesterday?",
+                        options: ["do", "did", "does", "are"],
+                        correct: 1
+                    }
+                ],
+                A2: [
+                    {
+                        question: "I'm going to the supermarket ___ some groceries.",
+                        options: ["to buy", "buy", "buying", "bought"],
+                        correct: 0
+                    },
+                    {
+                        question: "She's ___ than her sister.",
+                        options: ["tall", "taller", "tallest", "more tall"],
+                        correct: 1
+                    },
+                    {
+                        question: "If it rains, we ___ the picnic.",
+                        options: ["cancel", "will cancel", "would cancel", "cancelled"],
+                        correct: 1
+                    },
+                    {
+                        question: "He ___ in this company since 2010.",
+                        options: ["works", "worked", "has worked", "is working"],
+                        correct: 2
+                    },
+                    {
+                        question: "You ___ drive on the left in the UK.",
+                        options: ["must", "should", "ought", "have"],
+                        correct: 0
+                    },
+                    {
+                        question: "I'm not used to ___ early.",
+                        options: ["get up", "getting up", "got up", "have gotten up"],
+                        correct: 1
+                    },
+                    {
+                        question: "She suggested ___ to the cinema.",
+                        options: ["go", "going", "to go", "went"],
+                        correct: 1
+                    },
+                    {
+                        question: "This is the house ___ I was born.",
+                        options: ["which", "where", "who", "that"],
+                        correct: 1
+                    },
+                    {
+                        question: "I wish I ___ play the piano.",
+                        options: ["can", "could", "will", "may"],
+                        correct: 1
+                    },
+                    {
+                        question: "By next year, I ___ English for five years.",
+                        options: ["will study", "will be studying", "will have studied", "study"],
+                        correct: 2
+                    }
+                ]
+            };
+
+            const encouragementMessages = {
+                A1: [
+                    "Great start! Keep practicing every day to build your foundation.",
+                    "Well done! You're on your way to becoming an English speaker!",
+                    "Good effort! Remember to review regularly to reinforce what you've learned."
+                ],
+                A2: [
+                    "You're making progress! Keep expanding your vocabulary and practicing simple sentences.",
+                    "Well done! Try to incorporate English into your daily life for faster improvement.",
+                    "Good job! You're building a solid foundation - keep up the good work!"
+                ],
+                B1: [
+                    "Excellent work! You're becoming more confident in your English abilities.",
+                    "Great job! Try watching English movies with subtitles to improve further.",
+                    "Well done! You're now at a level where you can have real conversations!"
+                ],
+                B2: [
+                    "Impressive! You're expressing yourself clearly on a variety of topics.",
+                    "Outstanding! You're approaching fluency - keep challenging yourself with complex materials.",
+                    "Excellent work! You can now understand the main ideas of complex texts."
+                ],
+                C1: [
+                    "Amazing! You're using English flexibly and effectively for social and professional purposes.",
+                    "Exceptional! You're now able to produce detailed, well-structured text on complex subjects.",
+                    "Outstanding! You've mastered the language with fluency and spontaneity."
+                ],
+                C2: [
+                    "Incredible! You have mastered English at a level near that of a native speaker!",
+                    "Phenomenal! You can easily understand virtually everything heard or read in English.",
+                    "Magnificent! You've reached the highest level of English proficiency!"
+                ]
+            };
+
+            // Initialize progress
+            let userProgress = {
+                currentLevel: "A1",
+                scores: {},
+                testsCompleted: 0
+            };
+
+            // Load progress from localStorage if available
+            if (localStorage.getItem('hippoEngProgress')) {
+                userProgress = JSON.parse(localStorage.getItem('hippoEngProgress'));
+                updateProgressDisplay();
+            }
+
+            // Set up event listeners for test buttons
+            document.querySelectorAll('.start-test').forEach(button => {
+                button.addEventListener('click', function() {
+                    const level = this.getAttribute('data-level');
+                    startTest(level);
+                });
+            });
+
+            document.getElementById('next-question').addEventListener('click', nextQuestion);
+            document.getElementById('retake-test').addEventListener('click', function() {
+                startTest(currentTestLevel);
+            });
+            document.getElementById('view-progress').addEventListener('click', function() {
+                document.getElementById('progress').scrollIntoView({behavior: 'smooth'});
+            });
+
+            let currentTestLevel = '';
+            let currentQuestion = 0;
+            let userScore = 0;
+
+            function startTest(level) {
+                currentTestLevel = level;
+                currentQuestion = 0;
+                userScore = 0;
+                
+                document.getElementById('test-instructions').classList.add('hidden');
+                document.getElementById('test-results').classList.add('hidden');
+                document.getElementById('test-content').classList.remove('hidden');
+                
+                document.getElementById('test-level').textContent = `${level} Level Test`;
+                
+                showQuestion();
+                
+                document.getElementById('test').scrollIntoView({behavior: 'smooth'});
+            }
+
+            function showQuestion() {
+                const question = testQuestions[currentTestLevel][currentQuestion];
+                document.getElementById('question-number').textContent = currentQuestion + 1;
+                document.getElementById('question-text').textContent = question.question;
+                
+                const optionsContainer = document.getElementById('question-options');
+                optionsContainer.innerHTML = '';
+                
+                question.options.forEach((option, index) => {
+                    const label = document.createElement('label');
+                    label.innerHTML = `<input type="radio" name="answer" value="${index}"> ${option}`;
+                    optionsContainer.appendChild(label);
+                });
+            }
+
+            function nextQuestion() {
+                const selectedOption = document.querySelector('input[name="answer"]:checked');
+                if (!selectedOption) {
+                    alert('Please select an answer');
+                    return;
+                }
+                
+                const userAnswer = parseInt(selectedOption.value);
+                const correctAnswer = testQuestions[currentTestLevel][currentQuestion].correct;
+                
+                if (userAnswer === correctAnswer) {
+                    userScore++;
+                }
+                
+                currentQuestion++;
+                
+                if (currentQuestion < testQuestions[currentTestLevel].length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                document.getElementById('test-content').classList.add('hidden');
+                document.getElementById('test-results').classList.remove('hidden');
+                
+                document.getElementById('score').textContent = userScore;
+                
+                // Select random encouragement message
+                const messages = encouragementMessages[currentTestLevel];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.getElementById('encouragement-message').querySelector('p').textContent = randomMessage;
+                
+                // Update user progress
+                if (!userProgress.scores[currentTestLevel] || userScore > userProgress.scores[currentTestLevel]) {
+                    userProgress.scores[currentTestLevel] = userScore;
+                }
+                
+                userProgress.testsCompleted++;
+                
+                // Check if user has advanced to a new level
+                const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+                const currentLevelIndex = levels.indexOf(userProgress.currentLevel);
+                
+                // If score is 8 or more, consider advancing to next level
+                if (userScore >= 8 && currentLevelIndex < levels.length - 1) {
+                    userProgress.currentLevel = levels[currentLevelIndex + 1];
+                }
+                
+                // Save progress to localStorage
+                localStorage.setItem('hippoEngProgress', JSON.stringify(userProgress));
+                
+                // Update progress display
+                updateProgressDisplay();
+            }
+
+            function updateProgressDisplay() {
+                document.getElementById('current-level').textContent = userProgress.currentLevel;
+                
+                // Calculate progress percentage
+                const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+                const currentLevelIndex = levels.indexOf(userProgress.currentLevel);
+                const progressPercentage = (currentLevelIndex / (levels.length - 1)) * 100;
+                
+                document.getElementById('progress-fill').style.width = `${progressPercentage}%`;
+                
+                // Update progress details
+                let totalScore = 0;
+                let scoreCount = 0;
+                
+                for (const level in userProgress.scores) {
+                    totalScore += userProgress.scores[level];
+                    scoreCount++;
+                }
+                
+                const averageScore = scoreCount > 0 ? Math.round((totalScore / (scoreCount * 10)) * 100) : 0;
+                
+                document.getElementById('progress-details').innerHTML = `
+                    <p>Current Level: <strong>${userProgress.currentLevel}</strong></p>
+                    <p>Next Level: <strong>${levels[currentLevelIndex + 1] || 'None'}</strong></p>
+                    <p>Tests Completed: <strong>${userProgress.testsCompleted}</strong></p>
+                    <p>Average Score: <strong>${averageScore}%</strong></p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html
